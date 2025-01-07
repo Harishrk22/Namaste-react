@@ -1,22 +1,12 @@
-/*
-    <div class="parent">
-        <div class="child1">
-            <h1>h1 tag </h1>
-            <h2> h2 tag </h2>
-        </div>
-        <div class="child2">
-            <h1>h1 tag </h1>
-            <h2> h2 tag </h2>
-        </div>
-    </div>
-*/
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-const heading = React.createElement("div", { class: "parent" }, [
-  React.createElement("div", { class: "child1" }, [
+const heading = React.createElement("div", { className: "parent" }, [
+  React.createElement("div", { className: "child1" }, [
     React.createElement("h1", {}, "h1 tag"),
     React.createElement("h2", {}, "h2 tag"),
   ]),
-  React.createElement("div", { class: "child2" }, [
+  React.createElement("div", { className: "child2" }, [
     React.createElement("h1", {}, "h1 tag"),
     React.createElement("h2", {}, "h2 tag"),
   ]),
