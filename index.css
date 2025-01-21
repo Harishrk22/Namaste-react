@@ -27,7 +27,7 @@
 }
 .res-card {
   width: 200px;
-  height: 300px;
+
   border-radius: 5px;
   padding: 5px;
   margin: 10px;
@@ -47,4 +47,10 @@
   height: 120px;
   width: 100%;
   border-radius: 5px;
+}
+
+.filter-btn {
+  margin: 10px;
+  cursor: pointer;
+  padding: 5px;
 }
