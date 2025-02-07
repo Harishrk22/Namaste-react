@@ -2,34 +2,25 @@ import ResCard from "./ResCard";
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import useRestaurantList from "../utils/useRestaurantList";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
-  const [newresList, setNewresList] = useState([]);
+  const { newresList } = useRestaurantList();
   const [searchText, setSearchText] = useState("");
   const [filteredList, setFilteredList] = useState([]);
-
+  useEffect(() => {
+    setFilteredList(newresList);
+  }, [newresList]);
   const handleFilter = () => {
     const filteredResList = newresList.filter((res) => {
       return res.info.avgRating > 4.2;
     });
     setFilteredList(filteredResList);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9754605&lng=80.2207047&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-    const restaurants =
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-    setNewresList(restaurants);
-    setFilteredList(restaurants);
-  };
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false)
+    return <h1>Oops! Check your internet Connection!!</h1>;
 
   return newresList.length === 0 ? (
     <Shimmer />
