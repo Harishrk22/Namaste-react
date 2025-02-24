@@ -12,8 +12,15 @@ const useRestaurantMenu = (resId) => {
     setResInfo(jsonData);
 
     const menuData =
-      jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
-        ?.card?.card?.itemCards || [];
+      jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+        (c) => {
+          return (
+            c.card?.["card"]?.["@type"] ===
+            "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+          );
+        }
+      ) || [];
+    console.log("menusdad", menuData);
     setRestaurantMenu(menuData);
   };
 

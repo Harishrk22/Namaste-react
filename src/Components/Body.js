@@ -1,4 +1,4 @@
-import ResCard from "./ResCard";
+import ResCard, { withPromotedLabel } from "./ResCard";
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
@@ -9,9 +9,11 @@ const Body = () => {
   const { newresList } = useRestaurantList();
   const [searchText, setSearchText] = useState("");
   const [filteredList, setFilteredList] = useState([]);
+  const promotedResCard = withPromotedLabel(ResCard);
   useEffect(() => {
     setFilteredList(newresList);
   }, [newresList]);
+
   const handleFilter = () => {
     const filteredResList = newresList.filter((res) => {
       return res.info.avgRating > 4.2;
@@ -26,10 +28,10 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
+      <div className="filter m-4 p-4">
         <input
           type="text"
-          className="search-box"
+          className="border border-solid border-black px-4 py-2 rounded-lg"
           value={searchText}
           onChange={(e) => {
             item = e.target.value;
@@ -51,7 +53,7 @@ const Body = () => {
           search
         </button> */}
         <button
-          className="filter-btn"
+          className="px-4 py-2 m-4 bg-green-300 drop-shadow-lg rounded-lg"
           onClick={() => {
             handleFilter();
           }}
@@ -60,7 +62,7 @@ const Body = () => {
         </button>
       </div>
 
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredList.map((res) => (
           <Link to={`/restaurant/${res.info.id}`} key={res.info.id}>
             <ResCard resData={res} />
