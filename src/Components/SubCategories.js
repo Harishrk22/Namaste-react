@@ -1,6 +1,13 @@
 import Dishes from "./Dishes";
 import { CDN_URL } from "../utils/constant";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 const SubCategories = (props) => {
+  const dispatch = useDispatch();
+  const handleAddItem = (dish) => {
+    dispatch(addItem(dish));
+    console.log(dish);
+  };
   return (
     <>
       {props.item.map((dish) => {
@@ -25,7 +32,10 @@ const SubCategories = (props) => {
                 src={CDN_URL + dish?.card?.info?.imageId}
                 className="w-28 h-28"
               ></img>
-              <button className="p-3 mt-0  rounded-sm w-20 bg-white text-green-500 shadow-lg  m-auto absolute bottom-7 left-4 z-50">
+              <button
+                className="p-3 mt-0  rounded-sm w-20 bg-white text-green-500 shadow-lg  m-auto absolute bottom-7 left-4 z-50 cursor-pointer"
+                onClick={() => handleAddItem(dish)}
+              >
                 Add
               </button>
             </div>
