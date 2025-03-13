@@ -1,5 +1,5 @@
 import ResCard, { withPromotedLabel } from "./ResCard";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import useRestaurantList from "../utils/useRestaurantList";
@@ -30,11 +30,12 @@ const Body = () => {
     <div className="body">
       <div className="filter m-4 p-4">
         <input
+          data-testid="searchInput"
           type="text"
           className="border border-solid border-black px-4 py-2 rounded-lg"
           value={searchText}
           onChange={(e) => {
-            item = e.target.value;
+            const item = e.target.value;
             setSearchText(item);
             const filteredData = newresList.filter((res) =>
               res.info.name.toLowerCase().includes(item.toLowerCase())
@@ -54,6 +55,7 @@ const Body = () => {
         </button> */}
         <button
           className="px-4 py-2 m-4 bg-green-300 drop-shadow-lg rounded-lg"
+          name="filter"
           onClick={() => {
             handleFilter();
           }}

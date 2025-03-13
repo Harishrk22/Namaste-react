@@ -27,3 +27,8 @@
 
 STATE VARIABLE-
 //Whenever state variable changes it re - renders the component
+
+DIFFERENT TYPES OF TESTING THAT DEV CAN DO:
+1)Unit testing
+2)Integration testing
+3)e2e(end to end testing)
